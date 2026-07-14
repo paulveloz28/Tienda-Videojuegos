@@ -1,0 +1,265 @@
+/* ==========================================================================
+   1. RESETEO Y CONTROL DE ALTURA COMPLETA (Solución para iPad Pro y fondos)
+   ========================================================================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f5f9; /* Color de fondo gris suave que cubre TODA la pantalla */
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Forzamos a que el contenedor de React ocupe toda la pantalla disponible */
+#root {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ==========================================================================
+   2. CONTENEDOR DE LA TIENDA
+   ========================================================================== */
+.videojuegos-container {
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 1200px; /* Ancho máximo en pantallas grandes */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Encabezado */
+.videojuegos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.videojuegos-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.juegos-badge {
+  background-color: #ede9fe;
+  color: #6d28d9;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Tarjeta contenedora blanca */
+.videojuegos-wrapper {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   3. ESTILOS DE LA TABLA (Para escritorio y tablets como iPad)
+   ========================================================================== */
+.tabla-videojuegos {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.tabla-videojuegos th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  padding: 16px 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.tabla-videojuegos td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.tabla-videojuegos tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla-videojuegos tbody tr:hover {
+  background-color: #fcfbfe;
+}
+
+/* Detalles visuales internos */
+.titulo-destacado {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.precio-tag {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.genero-tag {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.disponible-tag {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.disponible-tag.si {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.disponible-tag.no {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Barra de Progreso */
+.progreso-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progreso-barra {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100px;
+  height: 8px;
+  border: none;
+}
+
+.progreso-barra::-webkit-progress-bar {
+  background-color: #e2e8f0;
+  border-radius: 4px;
+}
+
+.progreso-barra::-webkit-progress-value {
+  background: linear-gradient(90deg, #a78bfa, #818cf8);
+  border-radius: 4px;
+}
+
+.progreso-barra::-moz-progress-bar {
+  background: linear-gradient(90deg, #a78bfa, #818cf8);
+  border-radius: 4px;
+}
+
+.progreso-texto {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   4. CONTROL DE RESPONSIVIDAD (Media Queries Inteligentes)
+   ========================================================================== */
+
+/* En Tablets medianas (iPad Mini / Portrait Tablets): Mantenemos tabla pero más compacta */
+@media (max-width: 992px) and (min-width: 577px) {
+  .tabla-videojuegos th, 
+  .tabla-videojuegos td {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+  .progreso-barra {
+    width: 70px; /* Reducimos barra para evitar desbordes */
+  }
+}
+
+/* En Celulares (iPhone XR y similares < 576px): Transformación total a tarjetas */
+@media (max-width: 767px) {
+  .videojuegos-container {
+    padding: 16px 12px;
+  }
+
+  /* Desmontamos el wrapper para que las tarjetas respiren */
+  .videojuegos-wrapper {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  /* Ocultamos los títulos superiores de la tabla */
+  .tabla-videojuegos thead {
+    display: none;
+  }
+
+  .tabla-videojuegos, 
+  .tabla-videojuegos tbody, 
+  .tabla-videojuegos tr {
+    display: block;
+    width: 100%;
+  }
+
+  /* Tarjeta de cada juego */
+  .tabla-videojuegos tr {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    box-sizing: border-box;
+  }
+
+  /* Atributos / Celdas dentro de la tarjeta */
+  .tabla-videojuegos td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e2e8f0;
+    font-size: 0.88rem;
+    white-space: normal;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tabla-videojuegos td:last-child {
+    border-bottom: none;
+  }
+
+  /* Generación de etiquetas a la izquierda */
+  .tabla-videojuegos td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #64748b;
+    margin-right: 15px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .progreso-container {
+    justify-content: flex-end;
+  }
+}
