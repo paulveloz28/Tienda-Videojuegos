@@ -1,6 +1,6 @@
 import "./TablaVideojuegos.css";
 
-function TablaVideojuegos({ juegos }) {
+function TablaVideojuegos({ juegos, onEliminar }) {
   return (
     <div className="videojuegos-container">
       <div className="videojuegos-header">
@@ -19,6 +19,7 @@ function TablaVideojuegos({ juegos }) {
               <th>Precio</th>
               <th>Disponible</th>
               <th>Progreso</th>
+              <th>Acciones</th>
             </tr>
           </thead>
 
@@ -47,6 +48,10 @@ function TablaVideojuegos({ juegos }) {
                     ></progress>
                     <span className="progreso-texto">{Math.round(juego.progreso * 100)}%</span>
                   </div>
+                </td>
+                <td data-label="Acciones">
+                  <button>Editar</button>
+                  <button>Eliminar</button>
                 </td>
               </tr>
             ))}
