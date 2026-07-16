@@ -1,6 +1,18 @@
 import "./TablaVideojuegos.css";
+import { useNavigate } from "react-router-dom";
 
-function TablaVideojuegos({ juegos, onEliminar }) {
+function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
+
+  const navigate = useNavigate();
+
+  function manejarEditar(juego){
+    navigate("/editar", {
+      state: {
+        videojuego: juego,
+      },
+    });
+  }
+
   return (
     <div className="videojuegos-container">
       <div className="videojuegos-header">
@@ -50,8 +62,8 @@ function TablaVideojuegos({ juegos, onEliminar }) {
                   </div>
                 </td>
                 <td data-label="Acciones">
-                  <button>Editar</button>
-                  <button>Eliminar</button>
+                  <button onClick={()=> manejarEditar(juego)}>Editar</button>
+                  <button onClick={()=> onEliminar(juego.id)}>Eliminar</button>
                 </td>
               </tr>
             ))}
