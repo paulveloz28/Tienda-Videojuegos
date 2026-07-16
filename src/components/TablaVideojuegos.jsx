@@ -16,7 +16,10 @@ function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
   return (
     <div className="videojuegos-container">
       <div className="videojuegos-header">
-        <h2>Biblioteca de Videojuegos</h2>
+        <div>
+          <h2>🎮 Biblioteca de Videojuegos</h2>
+          <p>Administra tu colección de videojuegos.</p>
+        </div>
         <span className="juegos-badge">{juegos.length} títulos</span>
       </div>
 
@@ -62,8 +65,10 @@ function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
                   </div>
                 </td>
                 <td data-label="Acciones">
-                  <button onClick={()=> manejarEditar(juego)}>Editar</button>
-                  <button onClick={()=> onEliminar(juego.id)}>Eliminar</button>
+                  <div className="acciones-container">
+                    <button className="btn-editar" onClick={()=> manejarEditar(juego)}>✏️Editar</button>
+                    <button className="btn-eliminar" onClick={()=> onEliminar(juego.id)}>🗑️Eliminar</button>
+                  </div>
                 </td>
               </tr>
             ))}

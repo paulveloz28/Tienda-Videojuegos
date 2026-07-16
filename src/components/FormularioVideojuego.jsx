@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./FormularioVideojuego.css";
 
 function FormularioVideojuego({onGuardar}){
 
@@ -59,9 +60,14 @@ function FormularioVideojuego({onGuardar}){
     }
 
     return(
-      <div>
+      <div className="formulario-container">
+      <div className="formulario-card">  
+
+      <h2>{videojuegoRecuperado ? "Editar Videojuego" : "Nuevo Videojuego"}</h2>
+
         <label>Titulo</label>
         <input
+          className="form-control"
           type="text"
           value={titulo}
           onChange={(e)=> setTitulo(e.target.value)}
@@ -70,6 +76,7 @@ function FormularioVideojuego({onGuardar}){
         <label>
           Genero  
           <select
+            className="form-control"
             value={genero} 
             onChange={(e)=>setGenero(e.target.value)}
         > 
@@ -86,6 +93,7 @@ function FormularioVideojuego({onGuardar}){
         <label>
           Plataforma  
           <select
+            className="form-control"
             value={plataforma} 
             onChange={(e)=>setPlataforma(e.target.value)}
         > 
@@ -101,6 +109,7 @@ function FormularioVideojuego({onGuardar}){
 
         <label>Año de lanzamiento</label>
         <input
+          className="form-control"
           type="Number"
           value={lanzamiento}
           onChange={(e)=> setLanzamiento(e.target.value)}
@@ -111,6 +120,7 @@ function FormularioVideojuego({onGuardar}){
 
         <label>Precio</label>
         <input
+          className="form-control"
           type="Number"
           value={precio}
           onChange={(e)=> setPrecio(e.target.value)}
@@ -133,16 +143,20 @@ function FormularioVideojuego({onGuardar}){
         </label>
 
         <input
+          className="form-range"
           type="range"
           min="0"
           max="100"
           value={progreso * 100}
           onChange={(e)=> setProgreso(e.target.value / 100)}
         />
-
-        <button onClick={manejarGuardar}>Guardar</button>
-        <button onClick={manejarCancelar}>Cancelar</button>
-      </div>  
+        <div className="botones-formulario">
+            <button onClick={manejarGuardar}>Guardar</button>
+            <button onClick={manejarCancelar}>Cancelar</button>
+        </div>
+        
+      </div> 
+      </div> 
     );
 }
 

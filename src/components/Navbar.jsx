@@ -5,7 +5,7 @@ import "./Navbar.css";
 function Navbar(){
   return(
     <nav>
-      <span>Tienda Videojuegos</span>  
+      <span>🎮 Tienda de Videojuegos</span>  
 
       <div>
         <Link to="/">Inicio</Link>

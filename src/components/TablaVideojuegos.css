@@ -34,7 +34,7 @@ html, body {
   padding: 30px 20px;
   width: 100%;
   max-width: 1200px; /* Ancho máximo en pantallas grandes */
-  margin: 0 auto;
+  margin: 25px auto 0 auto;
   box-sizing: border-box;
 }
 
@@ -46,6 +46,19 @@ html, body {
   margin-bottom: 24px;
 }
 
+.header-info h2{
+    margin:0;
+    color:#1e293b;
+    font-size:1.8rem;
+    font-weight:700;
+}
+
+.header-info p{
+    margin-top:6px;
+    color:#64748b;
+    font-size:.95rem;
+}
+
 .videojuegos-header h2 {
   font-size: 1.5rem;
   font-weight: 600;
@@ -53,13 +66,16 @@ html, body {
   margin: 0;
 }
 
-.juegos-badge {
-  background-color: #ede9fe;
-  color: #6d28d9;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
+.juegos-badge{
+
+    background:linear-gradient(135deg,#ede9fe,#ddd6fe);
+    color:#6d28d9;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:.9rem;
+    font-weight:700;
+    box-shadow:0 3px 8px rgba(109,40,217,.15);
+
 }
 
 /* Tarjeta contenedora blanca */
@@ -262,4 +278,59 @@ html, body {
   .progreso-container {
     justify-content: flex-end;
   }
+}
+
+/* ==========================================================
+   BOTONES DE ACCIONES
+========================================================== */
+
+.acciones-container{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.btn-editar,
+.btn-eliminar{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+
+    border:none;
+    border-radius:8px;
+    padding:9px 14px;
+    cursor:pointer;
+    font-size:.85rem;
+    font-weight:600;
+    color:white;
+    transition:.25s;
+
+}
+
+.btn-editar{
+
+    background:#3b82f6;
+
+}
+
+.btn-editar:hover{
+
+    background:#2563eb;
+    transform:translateY(-2px);
+
+}
+
+.btn-eliminar{
+
+    background:#64748b;
+
+}
+
+.btn-eliminar:hover{
+
+    background:#475569;
+    transform:translateY(-2px);
+
 }
