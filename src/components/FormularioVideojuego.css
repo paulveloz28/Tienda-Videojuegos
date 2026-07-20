@@ -7,98 +7,301 @@
     min-height: calc(100vh - 70px);
 }
 
+
+/* Tarjeta principal del formulario */
 .formulario-card {
     width: 100%;
     max-width: 700px;
     background: #ffffff;
-    border-radius: 14px;
-    padding: 30px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    border-radius: 18px;
+    padding: 35px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.08);
+
+    transition: all 0.3s ease;
 }
 
+
+/* Efecto al pasar sobre la tarjeta */
+.formulario-card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* Título */
 .formulario-card h2 {
     text-align: center;
     margin-bottom: 25px;
+
     color: #2563eb;
+
     padding-bottom: 15px;
+
     border-bottom: 2px solid #e5e7eb;
 }
 
+
+/* Etiquetas */
 .formulario-card label {
+
     display: block;
+
     font-weight: 600;
+
     color: #374151;
+
     margin-top: 18px;
+
     margin-bottom: 8px;
 }
 
+
+
+/* Inputs, select y textarea */
 .form-control {
+
     width: 100%;
+
     padding: 12px;
+
     border: 1px solid #d1d5db;
-    border-radius: 8px;
+
+    border-radius: 10px;
+
     font-size: 16px;
+
     box-sizing: border-box;
-    transition: .3s;
+
+
+    /*
+      Requisito del taller:
+      transición suave al hacer focus
+    */
+    transition: all 0.3s ease;
+
 }
 
+
+
+/* Efecto moderno focus */
 .form-control:focus {
+
     outline: none;
+
     border-color: #2563eb;
-    box-shadow: 0 0 6px rgba(37,99,235,.25);
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,0.15);
+
 }
 
+
+
+/* Textarea dinámico */
+textarea.form-control {
+
+    min-height: 120px;
+
+    resize: vertical;
+
+    transition: all 0.3s ease;
+
+}
+
+
+/* Expansión al escribir */
+textarea.form-control:focus {
+
+    min-height: 170px;
+
+}
+
+
+
+/* Barra de progreso */
 .form-range {
+
     width: 100%;
+
     margin-top: 10px;
+
 }
 
+
+
+/* Contenedor botones */
 .botones-formulario {
+
     display: flex;
+
     justify-content: flex-end;
+
     gap: 12px;
+
     margin-top: 30px;
+
 }
 
+
+
+/* Botones */
 .botones-formulario button {
+
     border: none;
+
     padding: 12px 22px;
-    border-radius: 8px;
+
+    border-radius: 10px;
+
     cursor: pointer;
+
     color: white;
+
     font-size: 15px;
+
     font-weight: bold;
-    transition: .25s;
+
+
+    transition: all 0.3s ease;
+
 }
 
+
+
+/* Botón guardar */
 .botones-formulario button:first-child {
+
     background: #3b82f6;
+
 }
+
 
 .botones-formulario button:first-child:hover {
+
     background: #1d4ed8;
+
+    transform: translateY(-2px);
+
 }
 
+
+
+/* Botón cancelar */
 .botones-formulario button:last-child {
+
     background: #64748b;
+
 }
+
 
 .botones-formulario button:last-child:hover {
-    background: #b91c1c;
+
+    background: #475569;
+
+    transform: translateY(-2px);
+
 }
+
+
+
+/*
+=================================
+ VALIDACIONES VISUALES
+=================================
+*/
+
+
+.error-mensaje {
+
+    display: block;
+
+    margin-top: 5px;
+
+    margin-bottom: 10px;
+
+    color: #dc2626;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+
+    /*
+      Animación solicitada:
+      opacity 0 a 1
+    */
+
+    animation: aparecerError 0.3s ease;
+
+}
+
+
+
+@keyframes aparecerError {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-5px);
+
+    }
+
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+
+/*
+=================================
+ RESPONSIVE
+=================================
+*/
+
 
 @media (max-width:768px){
 
-    .formulario-card{
-        padding:20px;
+
+    .formulario-container {
+
+        padding: 20px 12px;
+
     }
 
-    .botones-formulario{
-        flex-direction:column;
+
+
+    .formulario-card {
+
+        padding: 20px;
+
+        border-radius: 14px;
+
     }
 
-    .botones-formulario button{
-        width:100%;
+
+
+    .botones-formulario {
+
+        flex-direction: column;
+
     }
+
+
+
+    .botones-formulario button {
+
+        width: 100%;
+
+    }
+
 
 }

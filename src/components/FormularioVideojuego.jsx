@@ -18,6 +18,13 @@ function FormularioVideojuego({onGuardar}){
     const [disponible, setDisponible] = useState(true);
     const [progreso, setProgreso] = useState(0);
 
+    const [fechaLanzamiento, setFechaLanzamiento] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [calificacion, setCalificacion] = useState("");
+
+    const [errores, setErrores] = useState({});
+
+
     useEffect(()=> {
       if(videojuegoRecuperado){
         setTitulo(videojuegoRecuperado.titulo);
@@ -27,6 +34,9 @@ function FormularioVideojuego({onGuardar}){
         setPrecio(videojuegoRecuperado.precio);
         setDisponible(videojuegoRecuperado.disponible);
         setProgreso(videojuegoRecuperado.progreso);
+        setFechaLanzamiento(videojuegoRecuperado.fechaLanzamiento);
+        setDescripcion(videojuegoRecuperado.descripcion);
+        setCalificacion(videojuegoRecuperado.calificacion);
       }else{
         setTitulo("");
         setGenero("");
@@ -35,10 +45,71 @@ function FormularioVideojuego({onGuardar}){
         setPrecio("");
         setDisponible(true);
         setProgreso(0);
+        setFechaLanzamiento("");
+        setDescripcion("");
+        setCalificacion("");
       }
     }, [videojuegoRecuperado]);
 
-    function manejarGuardar(){
+    function validarFormulario() {
+  const erroresActivos = {};
+
+  // Validar título
+  if (titulo.trim() === "") {
+    erroresActivos.titulo = "El título es obligatorio.";
+  }
+
+  // Validar fecha de lanzamiento
+  if (fechaLanzamiento === "") {
+    erroresActivos.fechaLanzamiento =
+      "Debe seleccionar una fecha de lanzamiento.";
+  } else {
+    const hoy = new Date().toISOString().split("T")[0];
+
+    if (fechaLanzamiento > hoy) {
+      erroresActivos.fechaLanzamiento =
+        "La fecha no puede ser posterior a la fecha actual.";
+    }
+  }
+
+  // Validar descripción
+  if (descripcion.trim().length < 10) {
+    erroresActivos.descripcion =
+      "La descripción debe tener al menos 10 caracteres.";
+  }
+
+  // Validar calificación
+  if (
+    calificacion === "" ||
+    Number(calificacion) < 1 ||
+    Number(calificacion) > 100
+  ) {
+    erroresActivos.calificacion =
+      "La calificación debe estar entre 1 y 100.";
+  }
+
+  // Validar precio
+  if (precio === "" || Number(precio) <= 0) {
+    erroresActivos.precio =
+      "Ingrese un precio válido.";
+  }
+
+  return erroresActivos;
+}
+    
+    function manejarGuardar(e){
+
+       e.preventDefault();
+
+        const erroresActivos = validarFormulario();
+
+        if (Object.keys(erroresActivos).length > 0) {
+          setErrores(erroresActivos);
+          return;
+        }
+
+        setErrores({});
+
        const videojuego = {
         id: 
           videojuegoRecuperado !== null && videojuegoRecuperado !== undefined ? videojuegoRecuperado.id : Date.now(),
@@ -49,6 +120,9 @@ function FormularioVideojuego({onGuardar}){
           precio: Number(precio),
           disponible,
           progreso: Number(progreso),
+          fechaLanzamiento,
+          descripcion,
+          calificacion: Number(calificacion),
        };
        
        onGuardar(videojuego);
@@ -61,7 +135,7 @@ function FormularioVideojuego({onGuardar}){
 
     return(
       <div className="formulario-container">
-      <div className="formulario-card">  
+      <form className="formulario-card" onSubmit={manejarGuardar}>
 
       <h2>{videojuegoRecuperado ? "Editar Videojuego" : "Nuevo Videojuego"}</h2>
 
@@ -73,6 +147,9 @@ function FormularioVideojuego({onGuardar}){
           onChange={(e)=> setTitulo(e.target.value)}
           placeholder="Ingrese el titulo del videojuego"
         />
+
+        {errores.titulo && (<span className="error-mensaje">{errores.titulo}</span>)}
+
         <label>
           Genero  
           <select
@@ -103,20 +180,20 @@ function FormularioVideojuego({onGuardar}){
             <option value="PlayStation 5">PlayStation 5</option>  
             <option value="Nintendo Switch">Nintendo Switch</option>
             <option value="Xbox Series X">Xbox Series X</option>
-            <option value="Xbox">Carreras</option>
+            <option value="Xbox">Xbox</option>
           </select>  
         </label>
 
-        <label>Año de lanzamiento</label>
+        <label>Fecha de lanzamiento</label>
+
         <input
           className="form-control"
-          type="Number"
-          value={lanzamiento}
-          onChange={(e)=> setLanzamiento(e.target.value)}
-          placeholder="Ej: 2024"
-          min="1970"
-          max="2100"
+          type="date"
+          value={fechaLanzamiento}
+          onChange={(e)=>setFechaLanzamiento(e.target.value)}
         />
+
+        {errores.fechaLanzamiento && (<span className="error-mensaje">{errores.fechaLanzamiento}</span>)}
 
         <label>Precio</label>
         <input
@@ -128,6 +205,38 @@ function FormularioVideojuego({onGuardar}){
           min="0"
           step="0.01"
         />
+
+        {errores.precio && (<span className="error-mensaje">{errores.precio}</span>)}
+
+        <label>Sinopsis / Descripción</label>
+
+        <textarea
+          className="form-control"
+          value={descripcion}
+          onChange={(e)=>setDescripcion(e.target.value)}
+          placeholder="Escribe una breve descripción del videojuego"
+          maxLength="250"
+        />
+
+        {errores.descripcion && (<span className="error-mensaje">{errores.descripcion}</span>)}
+
+        <p>
+          {descripcion.length}/250 caracteres
+        </p>
+
+        <label>Calificación de crítica</label>
+
+        <input
+          className="form-control"
+          type="number"
+          value={calificacion}
+          onChange={(e)=>setCalificacion(e.target.value)}
+          min="1"
+          max="100"
+          placeholder="Ejemplo: 95"
+        />
+
+        {errores.calificacion && (<span className="error-mensaje">{errores.calificacion}</span>)}
 
         <label>
           Disponible
@@ -151,12 +260,12 @@ function FormularioVideojuego({onGuardar}){
           onChange={(e)=> setProgreso(e.target.value / 100)}
         />
         <div className="botones-formulario">
-            <button onClick={manejarGuardar}>Guardar</button>
-            <button onClick={manejarCancelar}>Cancelar</button>
+            <button type="submit">Guardar</button>
+            <button type="button" onClick={manejarCancelar}>Cancelar</button>
         </div>
-        
+        </form>
       </div> 
-      </div> 
+       
     );
 }
 

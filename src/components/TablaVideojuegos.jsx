@@ -30,7 +30,9 @@ function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
               <th>Título</th>
               <th>Género</th>
               <th>Plataforma</th>
-              <th>Lanzamiento</th>
+              <th>Fecha Lanzamiento</th>
+              <th>Descripcion</th>
+              <th>Calificación</th>
               <th>Precio</th>
               <th>Disponible</th>
               <th>Progreso</th>
@@ -47,7 +49,10 @@ function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
                   <span className="genero-tag">{juego.genero}</span>
                 </td>
                 <td data-label="Plataforma">{juego.plataforma}</td>
-                <td data-label="Lanzamiento">{juego.lanzamiento}</td>
+                <td data-label="Fecha Lanzamiento">{juego.fechaLanzamiento}</td>
+                <td data-label="Descripcion">{juego.descripcion}</td>
+                <td data-label="Calificación">⭐ {juego.calificacion}</td>
+                
                 <td data-label="Precio" className="precio-tag">${juego.precio}</td>
                 <td data-label="Disponible">
                   <span className={`disponible-tag ${juego.disponible ? "si" : "no"}`}>

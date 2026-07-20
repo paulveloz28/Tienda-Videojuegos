@@ -85,7 +85,8 @@ html, body {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
   border: 1px solid #e2e8f0;
   background-color: #ffffff;
-  overflow: hidden;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 
 /* ==========================================================================
@@ -163,12 +164,13 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width:130px;
 }
 
 .progreso-barra {
   appearance: none;
   -webkit-appearance: none;
-  width: 100px;
+  width: 80px;
   height: 8px;
   border: none;
 }
