@@ -4,9 +4,11 @@ import "./FormularioVideojuego.css";
 
 function FormularioVideojuego({onGuardar}){
 
+    /* Hooks de navegación y recuperación de datos.*/
     const location = useLocation();
     const navigate = useNavigate();
 
+    /*Recupera el videojuego enviado desde la tabla para editarlo.*/
     const videojuegoRecuperado = location.state?.videojuego || null;
 
 
@@ -24,7 +26,7 @@ function FormularioVideojuego({onGuardar}){
 
     const [errores, setErrores] = useState({});
 
-
+    /*Carga los datos del videojuego cuando se edita un registro.*/
     useEffect(()=> {
       if(videojuegoRecuperado){
         setTitulo(videojuegoRecuperado.titulo);
@@ -59,7 +61,6 @@ function FormularioVideojuego({onGuardar}){
     erroresActivos.titulo = "El título es obligatorio.";
   }
 
-  // Validar fecha de lanzamiento
   if (fechaLanzamiento === "") {
     erroresActivos.fechaLanzamiento =
       "Debe seleccionar una fecha de lanzamiento.";

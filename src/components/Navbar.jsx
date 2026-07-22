@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-
+/*Permite acceder al inicio y al formulario de registro.*/
 function Navbar(){
   return(
     <nav>

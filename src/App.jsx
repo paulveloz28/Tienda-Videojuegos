@@ -11,6 +11,7 @@ import AlertaNotificacion from "./components/AlertaNotificacion";
 import PaginaNoEncontrada from "./components/PaginaNoEncontrada";
 
 function App() {
+  /*Estado que almacena la lista de videojuegos.*/
   const [videojuegos, setVideojuegos] = useState(() => {
   const datosGuardados = localStorage.getItem("lista_videojuegos");
 
@@ -21,6 +22,7 @@ function App() {
 
  const [mensaje, setMensaje] = useState("");
 
+/*Guarda automáticamente los videojuegos en LocalStorage cada vez que la lista cambia.*/
  useEffect(() => {
   localStorage.setItem(
     "lista_videojuegos",
@@ -78,7 +80,7 @@ function App() {
       onCerrar={cerrarMensaje}
     />
     )}
-
+      {/* Definición de las rutas de la aplicación */}
       <Routes>
         <Route
           path="/"

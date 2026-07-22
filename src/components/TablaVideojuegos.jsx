@@ -1,8 +1,10 @@
 import "./TablaVideojuegos.css";
 import { useNavigate } from "react-router-dom";
 
+/*Muestra la lista de videojuegos en una tabla con opciones para editar y eliminar cada registro.*/
 function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
 
+  /*Hook para navegar entre las rutas de la aplicación.*/
   const navigate = useNavigate();
 
   function manejarEditar(juego){
@@ -20,6 +22,7 @@ function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
           <h2>🎮 Biblioteca de Videojuegos</h2>
           <p>Administra tu colección de videojuegos.</p>
         </div>
+        {/* Muestra la cantidad de videojuegos registrados */}
         <span className="juegos-badge">{juegos.length} títulos</span>
       </div>
 
@@ -41,6 +44,7 @@ function TablaVideojuegos({ juegos, onEliminar, onEditar }) {
           </thead>
 
           <tbody>
+            {/* Recorre el arreglo de videojuegos */}
             {juegos.map((juego) => (
               <tr key={juego.id}>
                 {/* Agregamos data-label a cada celda */}
